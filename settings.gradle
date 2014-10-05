@@ -1,1 +1,1 @@
-include ':app', ':fftpacks'
+include ':app'

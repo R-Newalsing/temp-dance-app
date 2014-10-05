@@ -1,4 +1,4 @@
-package com.example.danceapp.app;
+package com.example.danceapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
@@ -16,17 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,17 +32,15 @@ import java.util.TimerTask;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
-public class MainActivity extends Activity implements SensorEventListener {
+
+public class Record extends Activity implements SensorEventListener {
 
     private float mLastX, mLastY, mLastZ;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
-    int BPM;
     final Handler handler = new Handler();
     Timer timer = new Timer();
-    private float force;
     Vibrator vibrate;
-    double counter = 0;
     Button button;
     EditText text;
     private boolean state = false;
@@ -56,7 +50,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.record);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mAccelerometer , SensorManager.SENSOR_DELAY_FASTEST);
@@ -118,9 +112,6 @@ public class MainActivity extends Activity implements SensorEventListener {
         mLastX = Math.abs(x);
         mLastY = Math.abs(y);
         mLastZ = Math.abs(z);
-
-        force = mLastX + mLastY + mLastZ;
-
     }
 
     public void plotGraph() {
@@ -159,24 +150,16 @@ public class MainActivity extends Activity implements SensorEventListener {
     {
         CSVWriter writer;
         List<String[]> database = new ArrayList<String[]>();
-        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyy");
         String format = s.format(new Date());
 
-        String outputFile = Environment.getExternalStorageDirectory().getPath()+"/"+ format + "dance.csv";
 
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("config.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write("hai");
-            outputStreamWriter.close();
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
 
+        String outputFile = getFilesDir()+"/"+ format + "dance.csv";
 
         for(int i = 0; i < list.size(); i++)
         {
-            database.add(new String[]{String.valueOf(i), list.get(i).toString()});
+            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString()});
         }
 
         try
@@ -185,7 +168,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             writer.writeAll(database);
             writer.close();
         }
-        catch (IOException e){e.printStackTrace();}
+        catch (IOException e){Log.d("WRITING", e.toString());}
     }
 
     TimerTask doAsynchronousTask = new TimerTask() {
@@ -197,17 +180,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                     try {
                         // add to array
                         list.add(new Float[]{mLastX, mLastY, mLastZ});
-//
-//                        if(counter%3 == 0)
-//                        {
-//                            vibrate.vibrate(150);
-//                        }
-//                        else
-//                        {
-//                            vibrate.vibrate(100);
-//                        }
-//
-//                        counter++;
                     }
                     catch (Exception e) {
                         Log.d("error", e.toString());

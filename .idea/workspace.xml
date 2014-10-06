@@ -100,14 +100,14 @@
       <file leaf-file-name="Record.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71428573" vertical-offset="4728" max-vertical-offset="5568">
-              <caret line="262" column="13" selection-start-line="262" selection-start-column="13" selection-end-line="262" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.104761906" vertical-offset="2528" max-vertical-offset="5568">
+              <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
               <folding>
                 <element signature="e#1480#1489#0" expanded="true" />
                 <element signature="e#1551#1561#0" expanded="true" />
-                <element signature="e#2627#3365#0" expanded="true" />
-                <element signature="e#3354#3355#0" expanded="true" />
-                <element signature="e#7159#7189#0" expanded="true" />
+                <element signature="e#2625#3363#0" expanded="true" />
+                <element signature="e#3352#3353#0" expanded="true" />
+                <element signature="e#7187#7217#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1598,7 +1598,11 @@
       <created>1412597635792</created>
       <updated>1412597635792</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="record sound">
+      <created>1412598715659</created>
+      <updated>1412598715659</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1653,7 +1657,8 @@
     <MESSAGE value="Added sound" />
     <MESSAGE value="Added sound2" />
     <MESSAGE value="FFT fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="FFT fix" />
+    <MESSAGE value="record sound" />
+    <option name="LAST_COMMIT_MESSAGE" value="record sound" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1674,9 +1679,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1717,9 +1722,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1757,9 +1762,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1797,9 +1802,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1840,9 +1845,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1872,9 +1877,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1921,9 +1926,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2069,14 +2074,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71428573" vertical-offset="4728" max-vertical-offset="5568">
-          <caret line="262" column="13" selection-start-line="262" selection-start-column="13" selection-end-line="262" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.104761906" vertical-offset="2528" max-vertical-offset="5568">
+          <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2627#3365#0" expanded="true" />
-            <element signature="e#3354#3355#0" expanded="true" />
-            <element signature="e#7159#7189#0" expanded="true" />
+            <element signature="e#2625#3363#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#7187#7217#0" expanded="true" />
           </folding>
         </state>
       </provider>

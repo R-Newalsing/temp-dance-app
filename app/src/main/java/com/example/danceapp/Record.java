@@ -50,9 +50,10 @@ public class Record extends Activity implements SensorEventListener {
     private boolean state = false;
     private ArrayList<Float[]> list = new ArrayList<Float[]>();
     private ArrayList<Double[]> list_sound = new ArrayList<Double[]>();
+    private Double sound = 0.0;
 
     //sound stuff
-    int frequency = 75;
+    int frequency = 8000;
     int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
     int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
     private RealDoubleFFT transformer;
@@ -130,40 +131,39 @@ public class Record extends Activity implements SensorEventListener {
     }
 
     public void plotGraph() {
-//        GraphView.GraphViewData[] dataX = new GraphView.GraphViewData[list.size()];
-//        GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
-//        GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
-//        GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataSound = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] dataX = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] dataSound = new GraphView.GraphViewData[list_sound.size()];
 
-        for (int i=0; i<list_sound.size(); i++)
+        for (int i=0; i<list.size(); i++)
         {
-
-//            dataX[i] = new GraphView.GraphViewData(i, list.get(i)[0]);
-//            dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
-//            dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
-//            dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
+            dataX[i] = new GraphView.GraphViewData(i, list.get(i)[0]);
+            dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
+            dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
+            dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
             dataSound[i] = new GraphView.GraphViewData(i, list_sound.get(i)[0]);
         }
 
-//        GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 00, 255), 3), dataX);
-//        GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
-//        GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(00, 204, 204), 3), dataZ);
-//        GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
-        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataSound);
+        GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 255), 3), dataX);
+        GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
+        GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataZ);
+        GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
+        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 225), 3), dataSound);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
-//        graphView.addSeries(graphX);
-//        graphView.addSeries(graphY);
-//        graphView.addSeries(graphZ);
-//        graphView.addSeries(graphTotal);
+        graphView.addSeries(graphX);
+        graphView.addSeries(graphY);
+        graphView.addSeries(graphZ);
+        graphView.addSeries(graphTotal);
         graphView.addSeries(graphSound);
 
         // optional - legend
         graphView.setShowLegend(true);
-        graphView.setViewPort(2, 40);
-        graphView.setScrollable(true);
-        // optional - activate scaling / zooming
+//        graphView.setViewPort(2, 40);
+//        graphView.setScrollable(true);
+//        optional - activate scaling / zooming
         graphView.setScalable(true);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
@@ -204,6 +204,8 @@ public class Record extends Activity implements SensorEventListener {
                     try {
                         // add to array
                         list.add(new Float[]{mLastX, mLastY, mLastZ});
+                        list_sound.add(new Double[]{sound});
+
                     }
                     catch (Exception e) {
                         Log.d("error", e.toString());
@@ -259,7 +261,7 @@ public class Record extends Activity implements SensorEventListener {
         protected void onProgressUpdate(double[]... toTransform) {
 
             for (int i = 0; i < toTransform[0].length; i++) {
-                list_sound.add(new Double[]{toTransform[0][i]});
+                sound = toTransform[0][i];
             }
         }
     }

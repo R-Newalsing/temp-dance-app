@@ -71,7 +71,7 @@ public class History extends Activity {
             while ((nextLine = reader.readNext()) != null) {
                 // nextLine[] is an array of values from the line
                 Log.d("CSV", nextLine[0]);
-                list.add(new Float[]{Float.valueOf(nextLine[1]), Float.valueOf(nextLine[2]), Float.valueOf(nextLine[3])});
+                list.add(new Float[]{Float.valueOf(nextLine[1]), Float.valueOf(nextLine[2]), Float.valueOf(nextLine[3]), Float.valueOf(nextLine[4])});
             }
         }
         catch (IOException e){Log.d("FILEREADER", e.toString());}
@@ -80,6 +80,7 @@ public class History extends Activity {
         GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] dataSound = new GraphView.GraphViewData[list.size()];
 
         for (int i=0; i<list.size(); i++)
         {
@@ -88,22 +89,25 @@ public class History extends Activity {
             dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
             dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
             dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
+            dataSound[i] = new GraphView.GraphViewData(i, list.get(i)[3]);
         }
 
         GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 00, 255), 3), dataX);
         GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
         GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(00, 204, 204), 3), dataZ);
         GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
+        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 255, 0), 3), dataSound);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
         graphView.addSeries(graphX);
         graphView.addSeries(graphY);
         graphView.addSeries(graphZ);
         graphView.addSeries(graphTotal);
+        graphView.addSeries(graphSound);
         // optional - legend
         graphView.setShowLegend(true);
-        graphView.setViewPort(2, 40);
-        graphView.setScrollable(true);
+//        graphView.setViewPort(2, 40);
+//        graphView.setScrollable(true);
         // optional - activate scaling / zooming
         graphView.setScalable(true);
 

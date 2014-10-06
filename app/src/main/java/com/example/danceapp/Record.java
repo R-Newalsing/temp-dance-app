@@ -150,7 +150,7 @@ public class Record extends Activity implements SensorEventListener {
         GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
         GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataZ);
         GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
-        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 225), 3), dataSound);
+        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 0), 3), dataSound);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
         graphView.addSeries(graphX);
@@ -183,7 +183,7 @@ public class Record extends Activity implements SensorEventListener {
 
         for(int i = 0; i < list.size(); i++)
         {
-            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString()});
+            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString(), list_sound.get(i)[0].toString()});
         }
 
         try
@@ -204,7 +204,7 @@ public class Record extends Activity implements SensorEventListener {
                     try {
                         // add to array
                         list.add(new Float[]{mLastX, mLastY, mLastZ});
-                        list_sound.add(new Double[]{sound});
+                        list_sound.add(new Double[]{sound*100});
 
                     }
                     catch (Exception e) {

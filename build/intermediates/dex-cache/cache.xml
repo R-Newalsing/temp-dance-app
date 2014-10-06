@@ -2,16 +2,16 @@
 <pre-dex-items>
 
     <item
-        dex="C:\Users\rewi\AndroidStudioProjects\DanceApp\app\build\intermediates\pre-dexed\debug\opencsv-2.4-8a1fff7299526fedf7ae17c455aa490e3f171784.jar"
-        jar="C:\Users\rewi\AndroidStudioProjects\DanceApp\app\libs\opencsv-2.4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="60597690a065746f9dd950e2e47e5f476b6c7367"/>
-    <item
-        dex="C:\Users\rewi\AndroidStudioProjects\DanceApp\app\build\intermediates\pre-dexed\debug\GraphView-3.1.3-d71beed1803a2c1a3249e84fa092726c0ec411b2.jar"
-        jar="C:\Users\rewi\AndroidStudioProjects\DanceApp\app\libs\GraphView-3.1.3.jar"
+        dex="C:\Users\rewi\temp-dance-app\app\build\intermediates\pre-dexed\debug\GraphView-3.1.3-829736fe4de0ea1b02b4f49025a83bc8e8f9ab71.jar"
+        jar="C:\Users\rewi\temp-dance-app\app\libs\GraphView-3.1.3.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="672e4a5d8906ab21665dcc08c1f7edb6efd6f903"/>
+    <item
+        dex="C:\Users\rewi\temp-dance-app\app\build\intermediates\pre-dexed\debug\opencsv-2.4-cc9a990a629028aea1ef57a66315f957f3eaf19d.jar"
+        jar="C:\Users\rewi\temp-dance-app\app\libs\opencsv-2.4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="60597690a065746f9dd950e2e47e5f476b6c7367"/>
 
 </pre-dex-items>

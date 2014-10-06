@@ -7,6 +7,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -20,7 +24,6 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,6 +34,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import au.com.bytecode.opencsv.CSVWriter;
+import ca.uol.aig.fftpack.RealDoubleFFT;
 
 
 public class Record extends Activity implements SensorEventListener {
@@ -46,6 +50,15 @@ public class Record extends Activity implements SensorEventListener {
     private boolean state = false;
     private ArrayList<Float[]> list = new ArrayList<Float[]>();
 
+    //sound stuff
+    int frequency = 8000;
+    int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
+    int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
+    private RealDoubleFFT transformer;
+    int blockSize = 1;
+
+    RecordAudio recordTask;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +69,8 @@ public class Record extends Activity implements SensorEventListener {
         mSensorManager.registerListener(this, mAccelerometer , SensorManager.SENSOR_DELAY_FASTEST);
         // vibrator
         vibrate = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        //sound stuff
+        transformer = new RealDoubleFFT(blockSize);
 
 
         button  = (Button) findViewById(R.id.button);
@@ -70,14 +85,13 @@ public class Record extends Activity implements SensorEventListener {
                     timer.schedule(doAsynchronousTask, 0, 100);
                     text.setVisibility(View.GONE);
                     state = true;
+                    recordTask = new RecordAudio();
+                    recordTask.execute();
                 }
                 else
                 {
                     timer.cancel();
-                    for(int i=0;i<list.size();i++)
-                    {
-                        Log.d("LOG", "X: " + list.get(i)[0].toString() + " - Y: " + list.get(i)[1].toString() + " - Z: " + list.get(i)[2].toString());
-                    }
+                    recordTask.cancel(true);
                     saveCsv();
                     plotGraph();
                     state = false;
@@ -188,4 +202,52 @@ public class Record extends Activity implements SensorEventListener {
             });
         }
     };
+
+    public class RecordAudio extends AsyncTask<Void, double[], Void>
+    {
+        @Override
+        protected Void doInBackground(Void... arg0)
+        {
+            try
+            {
+                // int bufferSize = AudioRecord.getMinBufferSize(frequency,
+                // AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
+                int bufferSize = AudioRecord.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
+
+                AudioRecord audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, frequency, channelConfiguration, audioEncoding, bufferSize);
+
+                short[] buffer = new short[blockSize];
+                double[] toTransform = new double[blockSize];
+
+                audioRecord.startRecording();
+
+                // started = true; hopes this should true before calling
+                // following while loop
+
+                while (state)
+                {
+                    int bufferReadResult = audioRecord.read(buffer, 0, blockSize);
+
+                    for (int i = 0; i < blockSize && i < bufferReadResult; i++)
+                    {
+                        toTransform[i] = (double) buffer[i] / 32768.0;
+                    }
+                    transformer.ft(toTransform);
+                    publishProgress(toTransform);
+                }
+
+                audioRecord.stop();
+
+            } catch (Throwable t) {
+                t.printStackTrace();
+                Log.e("AudioRecord", "Recording Failed");
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(double[]... toTransform) {
+            Log.d("SOUND", String.valueOf(toTransform[0][0]));
+        }
+    }
 }

@@ -157,7 +157,7 @@ public class Record extends Activity implements SensorEventListener {
 //        graphView.addSeries(graphY);
 //        graphView.addSeries(graphZ);
 //        graphView.addSeries(graphTotal);
-        graphView.addSeries(graphX);
+        graphView.addSeries(graphSound);
 
         // optional - legend
         graphView.setShowLegend(true);

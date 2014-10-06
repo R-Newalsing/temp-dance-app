@@ -56,7 +56,7 @@ public class Record extends Activity implements SensorEventListener {
     int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
     int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
     private RealDoubleFFT transformer;
-    int blockSize = 1;
+    int blockSize = 256;
 
     RecordAudio recordTask;
 
@@ -257,7 +257,10 @@ public class Record extends Activity implements SensorEventListener {
 
         @Override
         protected void onProgressUpdate(double[]... toTransform) {
-            list_sound.add(new Double[]{toTransform[0][0]});
+
+            for (int i = 0; i < toTransform[0].length; i++) {
+                list_sound.add(new Double[]{toTransform[0][i]});
+            }
         }
     }
 }

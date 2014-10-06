@@ -23,16 +23,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba54a64-9d6b-4df1-a459-155f9409d88c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/Complex1D.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/ComplexDoubleFFT.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/ComplexDoubleFFT_Mixed.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/RealDoubleFFT.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/RealDoubleFFT_Even.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/RealDoubleFFT_Even_Odd.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/RealDoubleFFT_Mixed.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/RealDoubleFFT_Odd.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uol/aig/fftpack/RealDoubleFFT_Odd_Odd.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp-dance-app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -110,14 +100,14 @@
       <file leaf-file-name="Record.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37142858" vertical-offset="2520" max-vertical-offset="5496">
-              <caret line="152" column="34" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.71428573" vertical-offset="4728" max-vertical-offset="5568">
+              <caret line="262" column="13" selection-start-line="262" selection-start-column="13" selection-end-line="262" selection-end-column="13" />
               <folding>
                 <element signature="e#1480#1489#0" expanded="true" />
                 <element signature="e#1551#1561#0" expanded="true" />
-                <element signature="e#2625#3363#0" expanded="true" />
-                <element signature="e#3352#3353#0" expanded="true" />
-                <element signature="e#7157#7187#0" expanded="true" />
+                <element signature="e#2627#3365#0" expanded="true" />
+                <element signature="e#3354#3355#0" expanded="true" />
+                <element signature="e#7159#7189#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1604,12 +1594,16 @@
       <created>1412597231436</created>
       <updated>1412597231436</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="FFT fix">
+      <created>1412597635792</created>
+      <updated>1412597635792</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1046" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1632,7 +1626,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1796875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1796875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58950967" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1658,7 +1652,8 @@
     </option>
     <MESSAGE value="Added sound" />
     <MESSAGE value="Added sound2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sound2" />
+    <MESSAGE value="FFT fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="FFT fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1679,9 +1674,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1722,9 +1717,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1762,9 +1757,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1802,9 +1797,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1845,9 +1840,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1877,9 +1872,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1926,9 +1921,9 @@
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2074,14 +2069,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37142858" vertical-offset="2520" max-vertical-offset="5496">
-          <caret line="152" column="34" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.71428573" vertical-offset="4728" max-vertical-offset="5568">
+          <caret line="262" column="13" selection-start-line="262" selection-start-column="13" selection-end-line="262" selection-end-column="13" />
           <folding>
             <element signature="e#1480#1489#0" expanded="true" />
             <element signature="e#1551#1561#0" expanded="true" />
-            <element signature="e#2625#3363#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#7157#7187#0" expanded="true" />
+            <element signature="e#2627#3365#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#7159#7189#0" expanded="true" />
           </folding>
         </state>
       </provider>

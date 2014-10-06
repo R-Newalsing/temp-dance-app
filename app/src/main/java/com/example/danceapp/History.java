@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.validation.Validator;
-
 import au.com.bytecode.opencsv.CSVReader;
 
 /**
@@ -104,6 +102,10 @@ public class History extends Activity {
         graphView.addSeries(graphTotal);
         // optional - legend
         graphView.setShowLegend(true);
+        graphView.setViewPort(2, 40);
+        graphView.setScrollable(true);
+        // optional - activate scaling / zooming
+        graphView.setScalable(true);
 
         listview.setVisibility(View.GONE);
         LinearLayout layout = (LinearLayout) findViewById(R.id.list_wrap);

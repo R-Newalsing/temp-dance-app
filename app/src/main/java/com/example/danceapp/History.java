@@ -107,9 +107,9 @@ public class History extends Activity {
         // optional - legend
         graphView.setShowLegend(true);
 //        graphView.setViewPort(2, 40);
-//        graphView.setScrollable(true);
+        graphView.setScrollable(true);
         // optional - activate scaling / zooming
-        graphView.setScalable(true);
+        graphView.setScalable(false);
 
         listview.setVisibility(View.GONE);
         LinearLayout layout = (LinearLayout) findViewById(R.id.list_wrap);

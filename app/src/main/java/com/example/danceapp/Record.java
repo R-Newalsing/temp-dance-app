@@ -12,6 +12,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
@@ -174,12 +175,13 @@ public class Record extends Activity implements SensorEventListener {
     {
         CSVWriter writer;
         List<String[]> database = new ArrayList<String[]>();
-        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyykkmm");
         String format = s.format(new Date());
 
 
 
-        String outputFile = getFilesDir()+"/"+ format + "dance.csv";
+        String outputFile  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+ format + "dance.csv";
+        String outputFile2 = getFilesDir() +"/"+ format + "dance.csv";
 
         for(int i = 0; i < list.size(); i++)
         {
@@ -189,6 +191,10 @@ public class Record extends Activity implements SensorEventListener {
         try
         {
             writer = new CSVWriter(new FileWriter(outputFile));
+            writer.writeAll(database);
+            writer.close();
+
+            writer = new CSVWriter(new FileWriter(outputFile2));
             writer.writeAll(database);
             writer.close();
         }

@@ -132,32 +132,32 @@ public class Record extends Activity implements SensorEventListener {
     }
 
     public void plotGraph() {
-        GraphView.GraphViewData[] dataX = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
+//        GraphView.GraphViewData[] dataX = new GraphView.GraphViewData[list.size()];
+//        GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
+//        GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
+//        GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] dataSound = new GraphView.GraphViewData[list_sound.size()];
 
-        for (int i=0; i<list.size(); i++)
+        for (int i=0; i<list_sound.size(); i++)
         {
-            dataX[i] = new GraphView.GraphViewData(i, list.get(i)[0]);
-            dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
-            dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
-            dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
+//            dataX[i] = new GraphView.GraphViewData(i, list.get(i)[0]);
+//            dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
+//            dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
+//            dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
             dataSound[i] = new GraphView.GraphViewData(i, list_sound.get(i)[0]);
         }
 
-        GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 255), 3), dataX);
-        GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
-        GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataZ);
-        GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
+//        GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 255), 3), dataX);
+//        GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
+//        GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataZ);
+//        GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
         GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 0), 3), dataSound);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
-        graphView.addSeries(graphX);
-        graphView.addSeries(graphY);
-        graphView.addSeries(graphZ);
-        graphView.addSeries(graphTotal);
+//        graphView.addSeries(graphX);
+//        graphView.addSeries(graphY);
+//        graphView.addSeries(graphZ);
+//        graphView.addSeries(graphTotal);
         graphView.addSeries(graphSound);
 
         // optional - legend
@@ -175,18 +175,25 @@ public class Record extends Activity implements SensorEventListener {
     {
         CSVWriter writer;
         List<String[]> database = new ArrayList<String[]>();
+        List<String[]> soundDb = new ArrayList<String[]>();
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyykkmm");
         String format = s.format(new Date());
 
 
 
         String outputFile  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+ format + "dance.csv";
+        String outputSound  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+ format + "Sound.csv";
         String outputFile2 = getFilesDir() +"/"+ format + "dance.csv";
 
         for(int i = 0; i < list.size(); i++)
         {
             database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString(), list_sound.get(i)[0].toString()});
         }
+        for(int i = 0; i < list_sound.size(); i++)
+        {
+            soundDb.add(new String[]{list_sound.get(i)[0].toString()});
+        }
+
 
         try
         {
@@ -196,6 +203,10 @@ public class Record extends Activity implements SensorEventListener {
 
             writer = new CSVWriter(new FileWriter(outputFile2));
             writer.writeAll(database);
+            writer.close();
+
+            writer = new CSVWriter(new FileWriter(outputSound));
+            writer.writeAll(soundDb);
             writer.close();
         }
         catch (IOException e){Log.d("WRITING", e.toString());}
@@ -267,7 +278,7 @@ public class Record extends Activity implements SensorEventListener {
         protected void onProgressUpdate(double[]... toTransform) {
 
             for (int i = 0; i < toTransform[0].length; i++) {
-                sound = toTransform[0][i];
+                list_sound.add(new Double[]{toTransform[0][i]});
             }
         }
     }

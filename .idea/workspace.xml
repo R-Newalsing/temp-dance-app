@@ -25,6 +25,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba54a64-9d6b-4df1-a459-155f9409d88c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/libs/beatroot-0.5.8.jar" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\Complex1D.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\ComplexDoubleFFT.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\ComplexDoubleFFT_Mixed.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\RealDoubleFFT.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\RealDoubleFFT_Even.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\RealDoubleFFT_Even_Odd.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\RealDoubleFFT_Mixed.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\RealDoubleFFT_Odd.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\src\main\java\ca\uol\aig\fftpack\RealDoubleFFT_Odd_Odd.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -81,8 +92,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -103,7 +114,7 @@
       <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.8181819" vertical-offset="0" max-vertical-offset="624">
+            <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="624">
               <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
               <folding />
             </state>
@@ -116,11 +127,10 @@
       <file leaf-file-name="Record.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.373613" vertical-offset="1685" max-vertical-offset="5904">
-              <caret line="263" column="20" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.08261406" vertical-offset="1685" max-vertical-offset="4728">
+              <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
               <folding>
-                <element signature="e#6528#6538#0" expanded="true" />
-                <element signature="e#8039#8069#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1210,6 +1220,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/History.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/wavelets/simple_haar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" />
       </list>
     </option>
@@ -1246,7 +1257,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
@@ -1384,6 +1394,10 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="danceapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1405,6 +1419,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1421,7 +1436,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="FullScreen" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_7eaa994416ae7b397b2628033ac45f8ff6ac2010/bin/git.exe" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="CB5A1P8RQJ" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="BH908NCQ16" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="MyAvd0" />
   </component>
   <component name="RecentsManager">
@@ -1432,12 +1447,12 @@
     <key name="android.template.packageName">
       <recent name="com.example.danceapp" />
     </key>
+    <key name="android.template.parentActivityClass">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\rewi\AndroidStudioProjects\DanceApp\app\src\main\java\ca\uol\aig\fftpack" />
       <recent name="C:\Users\rewi\AndroidStudioProjects\DanceApp\app\libs" />
-    </key>
-    <key name="android.template.parentActivityClass">
-      <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
@@ -1470,19 +1485,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -1508,6 +1510,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1640,17 +1655,20 @@
       <created>1412604823178</created>
       <updated>1412604823178</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="record sound - 3">
+      <created>1414249678060</created>
+      <updated>1414249678060</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1046" extended-state="0" />
+    <frame x="-11" y="-11" width="1942" height="1046" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23697917" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295325" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1659,7 +1677,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3278302" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32678983" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47575057" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1668,11 +1686,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1796875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5889146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23210162" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23697917" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32839224" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1705,36 +1724,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="456" max-vertical-offset="624">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2184" max-vertical-offset="6720">
-          <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-          <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/History.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2328" max-vertical-offset="3504">
@@ -1756,8 +1745,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="4152" max-vertical-offset="5760">
           <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1783,8 +1771,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="3349">
           <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1821,8 +1808,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="3349">
           <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1856,8 +1842,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1330" max-vertical-offset="3743">
           <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1891,8 +1876,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1330" max-vertical-offset="3743">
           <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1929,8 +1913,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3315">
           <caret line="159" column="54" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="54" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1956,8 +1939,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2703" max-vertical-offset="3315">
           <caret line="159" column="54" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="54" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2000,8 +1982,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1793" max-vertical-offset="3315">
           <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2081,13 +2062,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43784994" vertical-offset="0" max-vertical-offset="893">
-          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73619634" vertical-offset="0" max-vertical-offset="815">
@@ -2138,7 +2112,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8181819" vertical-offset="0" max-vertical-offset="624">
+        <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="624">
           <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
           <folding />
         </state>
@@ -2147,13 +2121,28 @@
         <state />
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-20/android.jar!/android/os/Handler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66433567" vertical-offset="1563" max-vertical-offset="1992">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38106796" vertical-offset="11" max-vertical-offset="960">
+          <caret line="7" column="75" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.373613" vertical-offset="1685" max-vertical-offset="5904">
-          <caret line="263" column="20" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.08261406" vertical-offset="1685" max-vertical-offset="4728">
+          <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
           <folding>
-            <element signature="e#6528#6538#0" expanded="true" />
-            <element signature="e#8039#8069#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

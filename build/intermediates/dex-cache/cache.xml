@@ -13,5 +13,11 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="60597690a065746f9dd950e2e47e5f476b6c7367"/>
+    <item
+        dex="C:\Users\rewi\temp-dance-app\app\build\intermediates\pre-dexed\debug\beatroot-0.5.8-cca59b5faffcf0eff48bc30671f3e5b7871d6ee6.jar"
+        jar="C:\Users\rewi\temp-dance-app\app\libs\beatroot-0.5.8.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="ab168b88d6ab6fc2cf512afa223056dcc3e191f6"/>
 
 </pre-dex-items>

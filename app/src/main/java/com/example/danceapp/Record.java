@@ -7,10 +7,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -35,7 +31,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import ca.uol.aig.fftpack.RealDoubleFFT;
 
 
 public class Record extends Activity implements SensorEventListener {
@@ -50,17 +45,6 @@ public class Record extends Activity implements SensorEventListener {
     EditText text;
     private boolean state = false;
     private ArrayList<Float[]> list = new ArrayList<Float[]>();
-    private ArrayList<Double[]> list_sound = new ArrayList<Double[]>();
-    private Double sound = 0.0;
-
-    //sound stuff
-    int frequency = 8000;
-    int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
-    int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
-    private RealDoubleFFT transformer;
-    int blockSize = 256;
-
-    RecordAudio recordTask;
 
     /** Called when the activity is first created. */
     @Override
@@ -73,8 +57,6 @@ public class Record extends Activity implements SensorEventListener {
         // vibrator
         vibrate = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         //sound stuff
-        transformer = new RealDoubleFFT(blockSize);
-
 
         button  = (Button) findViewById(R.id.button);
         text    = (EditText) findViewById(R.id.editText);
@@ -85,17 +67,14 @@ public class Record extends Activity implements SensorEventListener {
             {
                 if(!state)
                 {   // log every set seconds
-                    timer.schedule(doAsynchronousTask, 0, 100);
+                    // timer.schedule(doAsynchronousTask, 0, 10);
                     text.setVisibility(View.GONE);
                     state = true;
-                    recordTask = new RecordAudio();
-                    recordTask.execute();
                 }
                 else
                 {
-                    timer.cancel();
-                    recordTask.cancel(true);
-                    saveCsv();
+                    //timer.cancel();
+                    //saveCsv();
                     plotGraph();
                     state = false;
                     button.setVisibility(View.GONE);
@@ -129,42 +108,37 @@ public class Record extends Activity implements SensorEventListener {
         mLastX = Math.abs(x);
         mLastY = Math.abs(y);
         mLastZ = Math.abs(z);
+
+        list.add(new Float[]{mLastX, mLastY, mLastZ});
     }
 
     public void plotGraph() {
-//        GraphView.GraphViewData[] dataX = new GraphView.GraphViewData[list.size()];
-//        GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
-//        GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
-//        GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataSound = new GraphView.GraphViewData[list_sound.size()];
+        GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
+        double value[] = new double[list.size()];
 
-        for (int i=0; i<list_sound.size(); i++)
+        for (int i=0; i<list.size(); i++)
         {
-//            dataX[i] = new GraphView.GraphViewData(i, list.get(i)[0]);
-//            dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
-//            dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
-//            dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
-            dataSound[i] = new GraphView.GraphViewData(i, list_sound.get(i)[0]);
+            value[i] = Math.sqrt(
+                    (list.get(i)[0]*list.get(i)[0]) +
+                    (list.get(i)[1]*list.get(i)[1]) +
+                    (list.get(i)[2]*list.get(i)[2])
+            );
         }
 
-//        GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 255), 3), dataX);
-//        GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
-//        GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataZ);
-//        GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
-        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 0), 3), dataSound);
+
+        for (int i=0; i<list.size(); i++)
+        {
+            dataTotal[i] = new GraphView.GraphViewData(i, value[i]);
+        }
+
+        GraphViewSeries graphTotal2 = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataTotal);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
-//        graphView.addSeries(graphX);
-//        graphView.addSeries(graphY);
-//        graphView.addSeries(graphZ);
-//        graphView.addSeries(graphTotal);
-        graphView.addSeries(graphSound);
+        graphView.addSeries(graphTotal2);
 
         // optional - legend
         graphView.setShowLegend(true);
-//        graphView.setViewPort(2, 40);
-//        graphView.setScrollable(true);
-//        optional - activate scaling / zooming
+        graphView.setScrollable(true);
         graphView.setScalable(true);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
@@ -187,13 +161,8 @@ public class Record extends Activity implements SensorEventListener {
 
         for(int i = 0; i < list.size(); i++)
         {
-            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString(), list_sound.get(i)[0].toString()});
+            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString()});
         }
-        for(int i = 0; i < list_sound.size(); i++)
-        {
-            soundDb.add(new String[]{list_sound.get(i)[0].toString()});
-        }
-
 
         try
         {
@@ -221,8 +190,6 @@ public class Record extends Activity implements SensorEventListener {
                     try {
                         // add to array
                         list.add(new Float[]{mLastX, mLastY, mLastZ});
-                        list_sound.add(new Double[]{sound*100});
-
                     }
                     catch (Exception e) {
                         Log.d("error", e.toString());
@@ -231,55 +198,4 @@ public class Record extends Activity implements SensorEventListener {
             });
         }
     };
-
-    public class RecordAudio extends AsyncTask<Void, double[], Void>
-    {
-        @Override
-        protected Void doInBackground(Void... arg0)
-        {
-            try
-            {
-                // int bufferSize = AudioRecord.getMinBufferSize(frequency,
-                // AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
-                int bufferSize = AudioRecord.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
-
-                AudioRecord audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, frequency, channelConfiguration, audioEncoding, bufferSize);
-
-                short[] buffer = new short[blockSize];
-                double[] toTransform = new double[blockSize];
-
-                audioRecord.startRecording();
-
-                // started = true; hopes this should true before calling
-                // following while loop
-
-                while (state)
-                {
-                    int bufferReadResult = audioRecord.read(buffer, 0, blockSize);
-
-                    for (int i = 0; i < blockSize && i < bufferReadResult; i++)
-                    {
-                        toTransform[i] = (double) buffer[i] / 32768.0;
-                    }
-                    transformer.ft(toTransform);
-                    publishProgress(toTransform);
-                }
-
-                audioRecord.stop();
-
-            } catch (Throwable t) {
-                t.printStackTrace();
-                Log.e("AudioRecord", "Recording Failed");
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(double[]... toTransform) {
-
-            for (int i = 0; i < toTransform[0].length; i++) {
-                list_sound.add(new Double[]{toTransform[0][i]});
-            }
-        }
-    }
 }

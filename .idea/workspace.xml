@@ -25,9 +25,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba54a64-9d6b-4df1-a459-155f9409d88c" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\rewi\temp-dance-app\app\libs\beatroot-0.5.8.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/History.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/History.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/danceapp/Record.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DanceApp.iws" />
@@ -130,8 +127,8 @@
       <file leaf-file-name="History.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/History.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4377312" vertical-offset="1709" max-vertical-offset="3144">
-              <caret line="113" column="52" selection-start-line="113" selection-start-column="52" selection-end-line="113" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.82244146" vertical-offset="1709" max-vertical-offset="3144">
+              <caret line="126" column="71" selection-start-line="126" selection-start-column="71" selection-end-line="126" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -1681,7 +1678,11 @@
       <created>1414935424646</created>
       <updated>1414935424646</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="history fix">
+      <created>1414952251174</created>
+      <updated>1414952251174</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1739,7 +1740,8 @@
     <MESSAGE value="record sound" />
     <MESSAGE value="record sound - 3" />
     <MESSAGE value="logs" />
-    <option name="LAST_COMMIT_MESSAGE" value="logs" />
+    <MESSAGE value="history fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="history fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2329,8 +2331,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/danceapp/History.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4377312" vertical-offset="1709" max-vertical-offset="3144">
-          <caret line="113" column="52" selection-start-line="113" selection-start-column="52" selection-end-line="113" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.82244146" vertical-offset="1709" max-vertical-offset="3144">
+          <caret line="126" column="71" selection-start-line="126" selection-start-column="71" selection-end-line="126" selection-end-column="71" />
           <folding />
         </state>
       </provider>

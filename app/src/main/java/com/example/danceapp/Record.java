@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +46,8 @@ public class Record extends Activity implements SensorEventListener {
     EditText text;
     private boolean state = false;
     private ArrayList<Float[]> list = new ArrayList<Float[]>();
+    //Wakelock for running in the background
+    private PowerManager.WakeLock wakeLock;
 
     /** Called when the activity is first created. */
     @Override
@@ -60,7 +63,9 @@ public class Record extends Activity implements SensorEventListener {
 
         button  = (Button) findViewById(R.id.button);
         text    = (EditText) findViewById(R.id.editText);
-
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
         button.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -68,6 +73,7 @@ public class Record extends Activity implements SensorEventListener {
                 if(!state)
                 {   // log every set seconds
                     // timer.schedule(doAsynchronousTask, 0, 10);
+                    wakeLock.acquire();
                     text.setVisibility(View.GONE);
                     state = true;
                 }
@@ -75,6 +81,7 @@ public class Record extends Activity implements SensorEventListener {
                 {
                     //timer.cancel();
                     //saveCsv();
+                    wakeLock.release();
                     plotGraph();
                     state = false;
                     button.setVisibility(View.GONE);

@@ -75,35 +75,47 @@ public class History extends Activity {
             }
         }
         catch (IOException e){Log.d("FILEREADER", e.toString());}
-
-        GraphView.GraphViewData[] dataX = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataY = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataZ = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
-        GraphView.GraphViewData[] dataSound = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] delta = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] beepTotal = new GraphView.GraphViewData[list.size()];
+
+        double beep[]   = new double[list.size()];
+        for (int i=0; i<list.size(); i++)
+        {
+            if(i%100 == 0)
+            {
+                if(i%300 == 0)
+                {
+                    beep[i] = 40;
+                }
+                else
+                {
+                    beep[i] = 30;
+                }
+            }
+            else
+            {
+                beep[i] = 0;
+            }
+        }
 
         for (int i=0; i<list.size(); i++)
         {
 
-            dataX[i] = new GraphView.GraphViewData(i, list.get(i)[0]);
-            dataY[i] = new GraphView.GraphViewData(i, list.get(i)[1]);
-            dataZ[i] = new GraphView.GraphViewData(i, list.get(i)[2]);
-            dataTotal[i] = new GraphView.GraphViewData(i, list.get(i)[0] + list.get(i)[1] + list.get(i)[2]);
-            dataSound[i] = new GraphView.GraphViewData(i, list.get(i)[3]);
+            dataTotal[i] = new GraphView.GraphViewData(i, Math.sqrt(((list.get(i)[0]*list.get(i)[0])*2 + (list.get(i)[1]*list.get(i)[1])*2 + (list.get(i)[2]*list.get(i)[2])*2)-10));
+            delta[i] = new GraphView.GraphViewData(i, list.get(i)[3]);
+            beepTotal[i] = new GraphView.GraphViewData(i, beep[i]);
         }
 
-        GraphViewSeries graphX = new GraphViewSeries("X-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 00, 255), 3), dataX);
-        GraphViewSeries graphY = new GraphViewSeries("Y-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(51, 51, 255), 3), dataY);
-        GraphViewSeries graphZ = new GraphViewSeries("Z-as", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(00, 204, 204), 3), dataZ);
+        GraphViewSeries beepTotal2 = new GraphViewSeries("Beep", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 255), 3), beepTotal);
         GraphViewSeries graphTotal = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
-        GraphViewSeries graphSound = new GraphViewSeries("sound", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 255, 0), 3), dataSound);
+        GraphViewSeries graphSound = new GraphViewSeries("delta", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 255, 0), 3), delta);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
-        graphView.addSeries(graphX);
-        graphView.addSeries(graphY);
-        graphView.addSeries(graphZ);
+
         graphView.addSeries(graphTotal);
         graphView.addSeries(graphSound);
+        graphView.addSeries(beepTotal2);
         // optional - legend
         graphView.setShowLegend(true);
 //        graphView.setViewPort(2, 40);

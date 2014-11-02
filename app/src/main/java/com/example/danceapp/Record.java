@@ -26,6 +26,7 @@ import com.jjoe64.graphview.LineGraphView;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +53,7 @@ public class Record extends Activity implements SensorEventListener {
     private PowerManager.WakeLock wakeLock;
     private int currentTime = 0;
     ToneGenerator toneG;
+    double delta[];
 
     /** Called when the activity is first created. */
     @Override
@@ -77,21 +79,21 @@ public class Record extends Activity implements SensorEventListener {
             {
                 if(!state)
                 {   // log every set seconds
-                    wakeLock.acquire();
-                    timer.schedule(doAsynchronousTask, 0, (1000/12));
+                    timer.schedule(doAsynchronousTask, 0, (1000/15)/10);
                     text.setVisibility(View.GONE);
                     state = true;
+                    wakeLock.acquire();
                 }
                 else
                 {
-                    //timer.cancel();
-                    //saveCsv();
-                    wakeLock.release();
+                    timer.cancel();
                     toneG.stopTone();
                     toneG.release();
                     plotGraph();
+                    saveCsv();
                     state = false;
                     button.setVisibility(View.GONE);
+                    wakeLock.release();
                 }
 
             }
@@ -100,12 +102,10 @@ public class Record extends Activity implements SensorEventListener {
 
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -124,25 +124,57 @@ public class Record extends Activity implements SensorEventListener {
         mLastZ = Math.abs(z);
     }
 
+    public static double getMaxValue(double[] array){
+        double maxValue = array[0];
+        for(int i=1;i < array.length;i++){
+            if(array[i] > maxValue){
+                maxValue = array[i];
+            }
+        }
+        return maxValue;
+    }
 
+    public static double getMinValue(double[] array){
+        double minValue = array[0];
+        for(int i=1;i<array.length;i++){
+            if(array[i] < minValue){
+                minValue = array[i];
+            }
+        }
+        return minValue;
+    }
     public void plotGraph() {
         GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] beepTotal = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] deltaTotal = new GraphView.GraphViewData[list.size()];
 
-        double value[] = new double[list.size()];
-        double beep[] = new double[list.size()];
+        double value[]  = new double[list.size()];
+        double beep[]   = new double[list.size()];
+        delta  = new double[list.size()];
+        double temp[]   = new double[40];
+        double high     = 0.0;
+        double low      = 0.0;
 
         for (int i=0; i<list.size(); i++)
         {
             value[i] = Math.abs(Math.sqrt((
-                    ((list.get(i)[0]*list.get(i)[0]) +
-                    (list.get(i)[1]*list.get(i)[1]) +
-                    (list.get(i)[2]*list.get(i)[2])
-            ))-10));
+                    (
+                        (list.get(i)[0]*list.get(i)[0])*2 +
+                        (list.get(i)[1]*list.get(i)[1])*2 +
+                        (list.get(i)[2]*list.get(i)[2])*2)
+                    )-10)
+            );
 
-            if(i%8 == 0)
+            if(i%100 == 0)
             {
-                beep[i] = 50;
+                if(i%300 == 0)
+                {
+                    beep[i] = 40;
+                }
+                else
+                {
+                    beep[i] = 30;
+                }
             }
             else
             {
@@ -150,17 +182,40 @@ public class Record extends Activity implements SensorEventListener {
             }
         }
 
+        for (int i=0; i<value.length; i++)
+        {
+            if(i >= 20 && i < (value.length-20))
+            {
+                for(int j=0; j < temp.length; j++)
+                {
+                    temp[j] = value[(i-20)+j];
+
+                    high    = getMaxValue(temp);
+                    low     = getMinValue(temp);
+
+                }
+                delta[i] = high - low;
+            }
+            else
+            {
+                delta[i] = 0;
+            }
+        }
+
         for (int i=0; i<list.size(); i++)
         {
             dataTotal[i] = new GraphView.GraphViewData(i, value[i]);
             beepTotal[i] = new GraphView.GraphViewData(i, beep[i]);
+            deltaTotal[i] = new GraphView.GraphViewData(i, delta[i]);
         }
 
-        GraphViewSeries graphTotal2 = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 0), 3), dataTotal);
+        GraphViewSeries TotalAb = new GraphViewSeries("Total", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
         GraphViewSeries beepTotal2 = new GraphViewSeries("Beep", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 255), 3), beepTotal);
+        GraphViewSeries deltaTotal2 = new GraphViewSeries("delta", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 0), 3), deltaTotal);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
-        graphView.addSeries(graphTotal2);
+        graphView.addSeries(TotalAb);
+        graphView.addSeries(deltaTotal2);
         graphView.addSeries(beepTotal2);
 
         // optional - legend
@@ -183,12 +238,11 @@ public class Record extends Activity implements SensorEventListener {
 
 
         String outputFile  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+ format + "dance.csv";
-        String outputSound  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+ format + "Sound.csv";
         String outputFile2 = getFilesDir() +"/"+ format + "dance.csv";
 
         for(int i = 0; i < list.size(); i++)
         {
-            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString()});
+            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString(), String.valueOf(delta[i])});
         }
 
         try
@@ -199,10 +253,6 @@ public class Record extends Activity implements SensorEventListener {
 
             writer = new CSVWriter(new FileWriter(outputFile2));
             writer.writeAll(database);
-            writer.close();
-
-            writer = new CSVWriter(new FileWriter(outputSound));
-            writer.writeAll(soundDb);
             writer.close();
         }
         catch (IOException e){Log.d("WRITING", e.toString());}
@@ -217,9 +267,13 @@ public class Record extends Activity implements SensorEventListener {
                     try {
                         // add to array
                         list.add(new Float[]{mLastX, mLastY, mLastZ});
-                        if(currentTime%8 == 0)
+                       if(currentTime%100 == 0)
                         {
-                            toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200); // 200 is duration in ms
+                           if(currentTime%300 == 0) {
+                                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
+                            }else {
+                                toneG.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 150); // 200 is duration in ms
+                            }
                         }
 
                         currentTime++;

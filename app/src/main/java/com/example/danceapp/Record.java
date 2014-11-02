@@ -7,6 +7,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -48,6 +50,8 @@ public class Record extends Activity implements SensorEventListener {
     private ArrayList<Float[]> list = new ArrayList<Float[]>();
     //Wakelock for running in the background
     private PowerManager.WakeLock wakeLock;
+    private int currentTime = 0;
+    ToneGenerator toneG;
 
     /** Called when the activity is first created. */
     @Override
@@ -59,6 +63,7 @@ public class Record extends Activity implements SensorEventListener {
         mSensorManager.registerListener(this, mAccelerometer , SensorManager.SENSOR_DELAY_FASTEST);
         // vibrator
         vibrate = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
         //sound stuff
 
         button  = (Button) findViewById(R.id.button);
@@ -72,8 +77,8 @@ public class Record extends Activity implements SensorEventListener {
             {
                 if(!state)
                 {   // log every set seconds
-                    // timer.schedule(doAsynchronousTask, 0, 10);
                     wakeLock.acquire();
+                    timer.schedule(doAsynchronousTask, 0, (1000/12));
                     text.setVisibility(View.GONE);
                     state = true;
                 }
@@ -82,6 +87,8 @@ public class Record extends Activity implements SensorEventListener {
                     //timer.cancel();
                     //saveCsv();
                     wakeLock.release();
+                    toneG.stopTone();
+                    toneG.release();
                     plotGraph();
                     state = false;
                     button.setVisibility(View.GONE);
@@ -115,33 +122,46 @@ public class Record extends Activity implements SensorEventListener {
         mLastX = Math.abs(x);
         mLastY = Math.abs(y);
         mLastZ = Math.abs(z);
-
-        list.add(new Float[]{mLastX, mLastY, mLastZ});
     }
+
 
     public void plotGraph() {
         GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] beepTotal = new GraphView.GraphViewData[list.size()];
+
         double value[] = new double[list.size()];
+        double beep[] = new double[list.size()];
 
         for (int i=0; i<list.size(); i++)
         {
-            value[i] = Math.sqrt(
-                    (list.get(i)[0]*list.get(i)[0]) +
+            value[i] = Math.abs(Math.sqrt((
+                    ((list.get(i)[0]*list.get(i)[0]) +
                     (list.get(i)[1]*list.get(i)[1]) +
                     (list.get(i)[2]*list.get(i)[2])
-            );
-        }
+            ))-10));
 
+            if(i%8 == 0)
+            {
+                beep[i] = 50;
+            }
+            else
+            {
+                beep[i] = 0;
+            }
+        }
 
         for (int i=0; i<list.size(); i++)
         {
             dataTotal[i] = new GraphView.GraphViewData(i, value[i]);
+            beepTotal[i] = new GraphView.GraphViewData(i, beep[i]);
         }
 
-        GraphViewSeries graphTotal2 = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 204, 204), 3), dataTotal);
+        GraphViewSeries graphTotal2 = new GraphViewSeries("dataTotal", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 0), 3), dataTotal);
+        GraphViewSeries beepTotal2 = new GraphViewSeries("Beep", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 255), 3), beepTotal);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
         graphView.addSeries(graphTotal2);
+        graphView.addSeries(beepTotal2);
 
         // optional - legend
         graphView.setShowLegend(true);
@@ -197,6 +217,12 @@ public class Record extends Activity implements SensorEventListener {
                     try {
                         // add to array
                         list.add(new Float[]{mLastX, mLastY, mLastZ});
+                        if(currentTime%8 == 0)
+                        {
+                            toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200); // 200 is duration in ms
+                        }
+
+                        currentTime++;
                     }
                     catch (Exception e) {
                         Log.d("error", e.toString());

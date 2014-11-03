@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
@@ -54,6 +55,9 @@ public class Record extends Activity implements SensorEventListener {
     private int currentTime = 0;
     ToneGenerator toneG;
     double delta[];
+    double averageArray[];
+    double beep[];
+    double value[];
 
     /** Called when the activity is first created. */
     @Override
@@ -94,6 +98,7 @@ public class Record extends Activity implements SensorEventListener {
                     state = false;
                     button.setVisibility(View.GONE);
                     wakeLock.release();
+                    calculate();
                 }
 
             }
@@ -143,15 +148,57 @@ public class Record extends Activity implements SensorEventListener {
         }
         return minValue;
     }
+
+    private void calculate()
+    {
+        int totalPeaks  = 0;
+        int good        = 0;
+        int bad         = 0;
+        int score       = 0;
+
+
+        for(int i = 0; i < delta.length; i++) {
+            if (i % 300 == 0 && i != 0)
+            {
+                int count       = 0;
+
+                for(int j = 0; j < 30; j++)
+                {
+                    if(delta[i + j] < averageArray[i])
+                    {
+                        count++;
+                    }
+                }
+
+                if(count == 30)
+                {
+                    good++;
+                }
+                else
+                {
+                    bad++;
+                }
+
+                totalPeaks++;
+            }
+        }
+        score = (int)((double)good / (double)(totalPeaks/2) * 100.0);
+        Log.d("TEMP", String.valueOf(totalPeaks/2 + " -- " + good / (totalPeaks/2) + "Good = " + good + " - Bad = " + bad + " - total = " + totalPeaks + " - score = " + score));
+        Toast toast = Toast.makeText(this, "Good = " + good + " - Bad = " + bad + " - total = " + totalPeaks + " - score = " + score, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
     public void plotGraph() {
         GraphView.GraphViewData[] dataTotal = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] beepTotal = new GraphView.GraphViewData[list.size()];
         GraphView.GraphViewData[] deltaTotal = new GraphView.GraphViewData[list.size()];
+        GraphView.GraphViewData[] averageTotal = new GraphView.GraphViewData[list.size()];
 
-        double value[]  = new double[list.size()];
-        double beep[]   = new double[list.size()];
-        delta  = new double[list.size()];
+        value           = new double[list.size()];
+        beep            = new double[list.size()];
+        delta           = new double[list.size()];
         double temp[]   = new double[40];
+        averageArray    = new double[list.size()];
         double high     = 0.0;
         double low      = 0.0;
 
@@ -192,7 +239,6 @@ public class Record extends Activity implements SensorEventListener {
 
                     high    = getMaxValue(temp);
                     low     = getMinValue(temp);
-
                 }
                 delta[i] = high - low;
             }
@@ -202,21 +248,50 @@ public class Record extends Activity implements SensorEventListener {
             }
         }
 
+        double sum      = 0.0;
+        double average  = 0.0;
+
+        for(int i = 0; i < averageArray.length; i++)
+        {
+            if(i >= 600 && i < (averageArray.length - 600))
+            {
+                if(i%300 == 0)
+                {
+                    for(int j = 0; j < 600; j++)
+                    {
+                        sum += delta[(i-300) + j];
+                    }
+
+                    average = sum / 600;
+                }
+
+                averageArray[i] = average * 1.5;
+                sum     = 0.0;
+            }
+            else
+            {
+                averageArray[i] = 0.0;
+            }
+        }
+
         for (int i=0; i<list.size(); i++)
         {
-            dataTotal[i] = new GraphView.GraphViewData(i, value[i]);
-            beepTotal[i] = new GraphView.GraphViewData(i, beep[i]);
-            deltaTotal[i] = new GraphView.GraphViewData(i, delta[i]);
+            dataTotal[i]    = new GraphView.GraphViewData(i, value[i]);
+            beepTotal[i]    = new GraphView.GraphViewData(i, beep[i]);
+            deltaTotal[i]   = new GraphView.GraphViewData(i, delta[i]);
+            averageTotal[i] = new GraphView.GraphViewData(i, averageArray[i]);
         }
 
         GraphViewSeries TotalAb = new GraphViewSeries("Total", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 0), 3), dataTotal);
         GraphViewSeries beepTotal2 = new GraphViewSeries("Beep", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 0, 255), 3), beepTotal);
         GraphViewSeries deltaTotal2 = new GraphViewSeries("delta", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(255, 0, 0), 3), deltaTotal);
+        GraphViewSeries averageTotal2 = new GraphViewSeries("delta", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(0, 200, 200), 3), averageTotal);
 
         GraphView graphView = new LineGraphView(this, "Dance movement");
         graphView.addSeries(TotalAb);
         graphView.addSeries(deltaTotal2);
         graphView.addSeries(beepTotal2);
+        graphView.addSeries(averageTotal2);
 
         // optional - legend
         graphView.setShowLegend(true);
@@ -231,18 +306,15 @@ public class Record extends Activity implements SensorEventListener {
     {
         CSVWriter writer;
         List<String[]> database = new ArrayList<String[]>();
-        List<String[]> soundDb = new ArrayList<String[]>();
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyykkmm");
         String format = s.format(new Date());
-
-
 
         String outputFile  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+ format + "dance.csv";
         String outputFile2 = getFilesDir() +"/"+ format + "dance.csv";
 
         for(int i = 0; i < list.size(); i++)
         {
-            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString(), String.valueOf(delta[i])});
+            database.add(new String[]{String.valueOf(i), list.get(i)[0].toString(), list.get(i)[1].toString(), list.get(i)[2].toString(), String.valueOf(value[i]), String.valueOf(delta[i]), String.valueOf(averageArray[i]), String.valueOf(beep[i])});
         }
 
         try
@@ -272,7 +344,7 @@ public class Record extends Activity implements SensorEventListener {
                            if(currentTime%300 == 0) {
                                 toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
                             }else {
-                                toneG.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 150); // 200 is duration in ms
+                                toneG.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 150);
                             }
                         }
 
